@@ -1,0 +1,315 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta
+      name="description"
+      content="SamePlate is an interactive prototype for comparing the same restaurant order across delivery platforms and direct pickup."
+    />
+    <meta name="theme-color" content="#18212f" />
+    <title>SamePlate — Multi-platform order comparison</title>
+    <link rel="icon" type="image/svg+xml" href="favicon.svg" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,500&family=Inter:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css" />
+    <script>
+      (function () {
+        try {
+          var stored = localStorage.getItem("sameplate-theme");
+          if (stored === "light" || stored === "dark") {
+            document.documentElement.setAttribute("data-theme", stored);
+          }
+        } catch (e) {}
+      })();
+    </script>
+  </head>
+  <body>
+    <header class="topbar">
+      <a class="brand" href="#" aria-label="SamePlate home">
+        <span class="brand-mark" aria-hidden="true">S</span>
+        <span>SamePlate</span>
+      </a>
+      <div class="location" aria-label="Delivery location">
+        <span class="location-dot" aria-hidden="true"></span>
+        <span><strong>Toowong</strong><span class="location-detail">, QLD</span></span>
+      </div>
+      <div class="topbar-right">
+        <button id="theme-toggle" class="theme-toggle" type="button" aria-pressed="false" aria-label="Switch to dark mode"></button>
+        <span class="prototype-label">Prototype data</span>
+      </div>
+    </header>
+
+    <main>
+      <section id="home-screen" class="screen home-screen" aria-labelledby="home-title">
+        <div class="step-strip" aria-label="Progress">
+          <span class="step is-active"><span>1</span> Restaurant</span>
+          <span class="step-line" aria-hidden="true"></span>
+          <span class="step"><span>2</span> Order</span>
+          <span class="step-line" aria-hidden="true"></span>
+          <span class="step"><span>3</span> Compare</span>
+        </div>
+
+        <section class="home-intro">
+          <div class="home-copy">
+            <p class="eyebrow">Food delivery price transparency</p>
+            <h1 id="home-title">Build one basket.<br />See every total.</h1>
+            <p>
+              Choose a restaurant, add the food you want, then compare the same order across delivery platforms and direct pickup.
+            </p>
+          </div>
+          <div class="home-location" aria-label="Current comparison area">
+            <span class="home-location-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M12 21s-7-6.2-7-11.2a7 7 0 0 1 14 0C19 14.8 12 21 12 21Z" />
+                <circle cx="12" cy="9.6" r="2.5" />
+              </svg>
+            </span>
+            <div>
+              <span>Comparing restaurants near</span>
+              <strong>Toowong, QLD</strong>
+            </div>
+          </div>
+        </section>
+
+        <section class="restaurant-list" aria-labelledby="restaurant-list-title">
+          <div class="restaurant-list-heading">
+            <div>
+              <p class="eyebrow">Available in this prototype</p>
+              <h2 id="restaurant-list-title">Restaurants you can compare</h2>
+            </div>
+            <span>1 restaurant</span>
+          </div>
+
+          <article class="restaurant-card">
+            <img
+              src="assets/toowong-kitchen.webp"
+              alt="Burger, loaded fries, chicken wings and iced tea at Toowong Kitchen"
+            />
+            <div class="restaurant-card-content">
+              <div>
+                <span class="cuisine-label">Casual eats</span>
+                <h3>Toowong Kitchen</h3>
+                <p>20–30 min delivery · Pickup available</p>
+              </div>
+              <div class="restaurant-availability" aria-label="Available comparison channels">
+                <span>Uber Eats</span>
+                <span>DoorDash</span>
+                <span>Menulog</span>
+              </div>
+              <div class="restaurant-card-footer">
+                <p><strong>3 platforms</strong> available for whole-order comparison</p>
+                <button id="home-view-menu" class="primary-button restaurant-button" type="button">
+                  View menu
+                </button>
+              </div>
+            </div>
+          </article>
+        </section>
+
+        <section class="home-steps" aria-label="How SamePlate works">
+          <div><strong>01</strong><span>Choose your food using a typical delivery price.</span></div>
+          <div><strong>02</strong><span>Build one basket with all items and quantities.</span></div>
+          <div><strong>03</strong><span>Compare exact channel totals before deciding.</span></div>
+        </section>
+      </section>
+
+      <section id="menu-screen" class="screen" aria-labelledby="restaurant-name" hidden>
+        <div class="step-strip" aria-label="Progress">
+          <span class="step is-complete"><span><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="4 12.5 9.5 18 20 5" /></svg></span> Restaurant</span>
+          <span class="step-line" aria-hidden="true"></span>
+          <span class="step is-active"><span>2</span> Order</span>
+          <span class="step-line" aria-hidden="true"></span>
+          <span class="step"><span>3</span> Compare</span>
+        </div>
+
+        <button id="back-to-home" class="home-back-button" type="button">
+          <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <line x1="20" y1="12" x2="5" y2="12" />
+            <polyline points="11 6 5 12 11 18" />
+          </svg>
+          All restaurants
+        </button>
+
+        <section class="restaurant-hero">
+          <img
+            src="assets/toowong-kitchen.webp"
+            alt="Burger, loaded fries, chicken wings and iced tea at Toowong Kitchen"
+          />
+          <div class="restaurant-panel">
+            <p class="eyebrow">Casual eats · Toowong</p>
+            <h1 id="restaurant-name">Toowong Kitchen</h1>
+            <p>20–30 min delivery · Pickup available</p>
+          </div>
+        </section>
+
+        <div class="menu-layout">
+          <section class="menu-column" aria-labelledby="menu-title">
+            <div class="section-heading">
+              <div>
+                <p class="eyebrow">Choose what you actually want</p>
+                <h2 id="menu-title">Build your order</h2>
+              </div>
+              <button class="text-button" id="price-info-button" type="button">
+                How is the typical price calculated?
+              </button>
+            </div>
+
+            <nav class="category-tabs" aria-label="Menu categories">
+              <button type="button" class="category-tab is-active" data-category="all">All</button>
+              <button type="button" class="category-tab" data-category="mains">Mains</button>
+              <button type="button" class="category-tab" data-category="sides">Sides</button>
+              <button type="button" class="category-tab" data-category="drinks">Drinks</button>
+            </nav>
+
+            <div id="menu-grid" class="menu-grid"></div>
+          </section>
+
+          <aside class="basket-panel" aria-labelledby="basket-title">
+            <div class="basket-heading">
+              <div>
+                <p class="eyebrow">Live estimate</p>
+                <h2 id="basket-title">Your order</h2>
+              </div>
+              <span id="basket-count-badge" class="count-badge">0 items</span>
+            </div>
+
+            <div id="basket-empty" class="empty-basket">
+              <span class="empty-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M5.5 8h13l-1.1 11.2a2 2 0 0 1-2 1.8H8.6a2 2 0 0 1-2-1.8L5.5 8Z" />
+                  <path d="M9 8V6.5a3 3 0 0 1 6 0V8" />
+                </svg>
+              </span>
+              <p>Add more than one item to see how the whole-order estimate changes.</p>
+            </div>
+
+            <div id="basket-content" class="basket-content" hidden>
+              <div id="basket-lines" class="basket-lines"></div>
+              <div class="receipt-rule" aria-hidden="true"></div>
+              <dl class="estimate-summary">
+                <div>
+                  <dt>Typical delivery subtotal</dt>
+                  <dd id="typical-subtotal">$0.00</dd>
+                </div>
+              </dl>
+              <p class="fee-note">Full delivery fees and pickup comparison appear next.</p>
+            </div>
+
+            <button id="compare-button" class="primary-button" type="button" disabled>
+              Compare this order
+            </button>
+          </aside>
+        </div>
+
+        <div id="mobile-cart" class="mobile-cart" hidden>
+          <div>
+            <span id="mobile-count">0 items</span>
+            <strong id="mobile-estimate">$0.00 typical</strong>
+          </div>
+          <button id="mobile-compare-button" class="primary-button" type="button">Compare</button>
+        </div>
+      </section>
+
+      <section id="compare-screen" class="screen" aria-labelledby="compare-title" hidden>
+        <div class="compare-shell">
+          <div class="step-strip" aria-label="Progress">
+            <span class="step is-complete"><span><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="4 12.5 9.5 18 20 5" /></svg></span> Restaurant</span>
+            <span class="step-line is-complete" aria-hidden="true"></span>
+            <span class="step is-complete"><span><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="4 12.5 9.5 18 20 5" /></svg></span> Order</span>
+            <span class="step-line is-complete" aria-hidden="true"></span>
+            <span class="step is-active"><span>3</span> Compare</span>
+          </div>
+
+          <div class="compare-heading">
+            <button id="back-to-menu" class="back-button" type="button" aria-label="Back to menu">
+              <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <line x1="20" y1="12" x2="5" y2="12" />
+                <polyline points="11 6 5 12 11 18" />
+              </svg>
+            </button>
+            <div>
+              <p class="eyebrow">Same food · Same quantities</p>
+              <h1 id="compare-title">Choose what the convenience is worth</h1>
+              <p id="compare-subtitle">Your order across available channels in Toowong.</p>
+            </div>
+          </div>
+
+          <div class="comparison-layout">
+            <section class="comparison-column" aria-label="Channel comparison">
+              <div class="comparison-legend">
+                <span>Ranked by final total</span>
+                <span>Promotions not applied</span>
+              </div>
+              <div id="platform-list" class="platform-list"></div>
+            </section>
+
+            <aside class="decision-panel" aria-labelledby="selected-channel-title">
+              <p class="eyebrow">Your selection</p>
+              <h2 id="selected-channel-title">Select a channel</h2>
+              <div id="selected-channel-empty" class="decision-empty">
+                Choose one option to see the final decision clearly.
+              </div>
+              <div id="selected-channel-content" hidden>
+                <div class="selected-total">
+                  <span id="selected-channel-name">Channel</span>
+                  <strong id="selected-channel-total">$0.00</strong>
+                </div>
+                <p id="selected-channel-context" class="selected-context"></p>
+              </div>
+              <button id="continue-button" class="primary-button" type="button" disabled>
+                Continue with this option
+              </button>
+              <button id="modify-button" class="secondary-button" type="button">Modify order</button>
+            </aside>
+          </div>
+        </div>
+      </section>
+
+      <section id="complete-screen" class="screen completion-screen" aria-labelledby="complete-title" hidden>
+        <div class="completion-card">
+          <span class="completion-mark" aria-hidden="true">
+            <svg viewBox="0 0 24 24" width="30" height="30" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="4 12.5 9.5 18 20 5" />
+            </svg>
+          </span>
+          <p class="eyebrow">Decision made</p>
+          <h1 id="complete-title">You chose <span id="complete-channel">a channel</span></h1>
+          <p id="complete-summary"></p>
+          <div class="prototype-boundary">
+            The prototype ends here. A full product would open the selected restaurant or delivery platform with this basket.
+          </div>
+          <button id="restart-button" class="primary-button" type="button">Back to home</button>
+        </div>
+      </section>
+    </main>
+
+    <dialog id="price-dialog" class="price-dialog" aria-labelledby="price-dialog-title">
+      <button id="close-dialog" class="dialog-close" type="button" aria-label="Close">
+      <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true">
+        <line x1="6" y1="6" x2="18" y2="18" />
+        <line x1="18" y1="6" x2="6" y2="18" />
+      </svg>
+    </button>
+      <p class="eyebrow">One useful number while choosing</p>
+      <h2 id="price-dialog-title">What “typical delivery price” means</h2>
+      <p>
+        It is the median menu price for the same item across Uber Eats, DoorDash and Menulog. It helps you budget without filling every menu card with three competing prices.
+      </p>
+      <div class="dialog-example">
+        <span>DoorDash $16</span>
+        <span>Uber Eats $17</span>
+        <span>Menulog $21</span>
+        <strong>Typical price $17</strong>
+      </div>
+      <p class="dialog-note">It excludes delivery and service fees. Exact platform totals appear after you build the order.</p>
+    </dialog>
+
+    <div id="status-message" class="sr-only" aria-live="polite"></div>
+    <script src="app.js"></script>
+  </body>
+</html>
