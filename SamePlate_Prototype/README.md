@@ -1,45 +1,45 @@
 # SamePlate Prototype
 
-带简单主页的 SamePlate 可交互网页原型。包含原有主页、Toowong Kitchen 菜单、多餐品购物篮、整单比价和渠道选择流程。
+SamePlate is an interactive web prototype with a simple home page. It includes the original home page, the Toowong Kitchen menu, a multi-item basket, whole-order price comparison, and channel selection.
 
-## 如何打开
+## How to Open
 
-1. 先完整解压 ZIP 文件。
-2. 进入 `SamePlate_Prototype` 文件夹，双击 `index.html`，用 Chrome、Edge 或 Firefox 打开即可。
-3. 这是纯 HTML、CSS 和 JavaScript 项目，无需安装 Node.js、npm 或其他依赖。
+1. Extract the ZIP file completely.
+2. Open the `SamePlate_Prototype` folder, double-click `index.html`, and open it in Chrome, Edge, or Firefox.
+3. This is a plain HTML, CSS, and JavaScript project. No Node.js, npm, or other dependencies are required.
 
-## 在 VS Code 中编辑
+## Edit in VS Code
 
-1. 在 VS Code 选择 File → Open Folder，打开解压后的 `SamePlate_Prototype` 文件夹。
-2. 编辑对应文件，保存后刷新浏览器查看效果。
-3. 如果你已安装 Live Server 扩展，可以右键 `index.html` → Open with Live Server。
+1. In VS Code, select File → Open Folder and open the extracted `SamePlate_Prototype` folder.
+2. Edit the relevant file, save it, and refresh the browser to see the changes.
+3. If you have the Live Server extension installed, right-click `index.html` and select Open with Live Server.
 
-## 文件说明
+## File Guide
 
-- `index.html`：主页、菜单、比价、完成页及价格说明弹窗。
-- `styles.css`：桌面和手机布局、颜色与样式。
-- `app.js`：示例餐品和平台价格、购物篮、计算逻辑及页面交互。
-- `assets/toowong-kitchen.webp`：页面使用的图片。
+- `index.html`: Home page, menu, comparison, completion page, and price explanation modal.
+- `styles.css`: Desktop and mobile layouts, colors, and styling.
+- `app.js`: Sample menu items and platform prices, basket, calculation logic, and page interactions.
+- `assets/toowong-kitchen.webp`: Image used in the prototype.
 
-## 演示步骤
+## Demo Flow
 
-主页 → View menu → 添加一份 Classic Smash Burger、一份 Loaded Fries 和两杯 House Iced Tea → Compare this order → 查看费用明细 → 选择渠道 → Continue with this option → Back to home。
+Home → View menu → Add one Classic Smash Burger, one Loaded Fries, and two House Iced Teas → Compare this order → Review the fee breakdown → Select a channel → Continue with this option → Back to home.
 
-可以增加或减少餐品数量、切换餐品分类，或在比价页点击 Modify order 返回修改。
+You can increase or decrease item quantities, switch menu categories, or select Modify order on the comparison page to make changes.
 
-## 价格计算
+## Price Calculation
 
-所有金额以澳元（AUD）显示。
+All amounts are shown in Australian dollars (AUD).
 
-- Typical delivery price：同一餐品在三个示例平台上的菜单价格中位数。
-- Typical delivery subtotal：每件餐品的中位数价格 × 数量，再求和；不包含配送费和服务费。订单页（Build your order）只展示这一个汇总数字，各平台小计区间和自取参考价改为在下一步整单比价页按渠道逐一显示。
-- Final total：所选渠道的餐品小计 + 配送费 + 服务费。
-- Restaurant pickup：餐厅自取餐品小计，无平台费用，在整单比价页作为其中一个可选渠道呈现。
+- Typical delivery price: The median menu price for the same item across the three example platforms.
+- Typical delivery subtotal: The median price for each item multiplied by its quantity, then added together. This excludes delivery and service fees. The order page (Build your order) shows only this summary figure; platform subtotal ranges and the pickup reference price are shown by channel on the next whole-order comparison page.
+- Final total: The selected channel's item subtotal plus delivery and service fees.
+- Restaurant pickup: The restaurant pickup item subtotal with no platform fees, shown as one of the available channels on the whole-order comparison page.
 
-## 演示数据与范围
+## Demo Data and Scope
 
-本项目中的餐品价格、平台费用和配送时间均为演示设定，不是实时数据，也不代表平台当前的收费规则或服务情况。界面保留原型中的 Uber Eats、DoorDash 和 Menulog 示例渠道。
+The item prices, platform fees, and delivery times in this project are illustrative settings. They are not live data and do not represent the current fees or service conditions of any platform. The interface retains the Uber Eats, DoorDash, and Menulog example channels from the prototype.
 
-当前未应用促销或优惠券，不连接外卖平台、不发送订单、不处理付款。渠道选择后的页面就是演示终点。刷新页面会清空当前购物篮。
+Promotions and coupons are not applied. The prototype does not connect to delivery platforms, submit orders, or process payments. The page after channel selection is the end of the demo flow. Refreshing the page clears the current basket.
 
-在线版本：https://sameplate-prototype.yaoziyan020704.chatgpt.site
+Online version: https://sameplate-prototype.yaoziyan020704.chatgpt.site
